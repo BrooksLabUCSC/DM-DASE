@@ -56,10 +56,10 @@ input.data = data.table::fread(input.file)
 ######################################################################################
 
 clean_drimseq_data = function(x, 
-							                pval_treshold
+			      pval_treshold
                               ) {
 
-	temp_sig_df = x %>% 
+  temp_sig_df = x %>% 
     dplyr::filter(adj_pvalue < as.numeric(pval_treshold))
 
   temp_sig_df$gene_id_ann = gsub(pattern="([0-9])_([a-zA-Z])", 
@@ -87,7 +87,7 @@ clean_drimseq_data = function(x,
                                 as.character(temp_sig_df$annotation)
                                 )
   
-	temp_df = temp_sig_df %>% 
+  temp_df = temp_sig_df %>% 
     dplyr::select(gene_id, pvalue, adj_pvalue, 
                   symbol, as_event_type, annotation)
   
