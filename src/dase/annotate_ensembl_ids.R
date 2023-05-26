@@ -3,11 +3,11 @@
 ### Annotate Ensembl Gene IDs
 ######################################################################################
 
-compute_gene_names = function(x, 
-							  y, 
-							  test,
-							  ...
-							  ) {
+compute_gene_names = function(x,
+			      y,
+			      test,
+			      ...
+			      ) {
 
 	temp.ann.data = y %>% dplyr::rename(ensembl_id=gene_id)
 
