@@ -42,13 +42,13 @@ clean_gtf_feature_ids = function(x) {
 
 clean_gtf_data = function(x, release) {
 
-	release_date = paste0("##date: ", release) 
-	temp_df = x %>% 
+   release_date = paste0("##date: ", release) 
+   temp_df = x %>% 
     dplyr::select(chr=release_date, source=V2, feature=V3, 
                   start=V4, end=V5, strand=V7, attribute=V9) %>% 
-  	dplyr::filter(source=="ENSEMBL")%>%
+    dplyr::filter(source=="ENSEMBL")%>%
     dplyr::select(-source) %>% 
-  	tidyr::separate(attribute, 
+    tidyr::separate(attribute, 
                     into=c("ensembl", "transcript_id", 
                            "gene_type", "gene_name"), 
                     sep=";"
@@ -74,8 +74,8 @@ clean_gtf_data = function(x, release) {
 
 clean_drimseq_data = function(x) {
 
-	temp_df = x %>%
-		tidyr::separate(gene_id, 
+  temp_df = x %>%
+    tidyr::separate(gene_id, 
                     into=c("ensembl", "chr", "start", "stop"), 
                     sep="_", remove=FALSE) %>%
     tidyr::separate(stop, 
