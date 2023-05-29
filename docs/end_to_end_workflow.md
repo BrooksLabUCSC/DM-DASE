@@ -1,10 +1,10 @@
 
 ## Motivation
 
-Identifying differentially spliced genes and transcripts in cancer requires prior identification and annotation of AS events in tumors. To identify and annotate novel AS events (at either the cancer or pan-cancer or single-cell level), it is required to quantify and classify AS events from sequencing reads. JuncBASE (Junction-Based Analysis of Splicing Events) is a tool to quantify and classify AS events using splice junctions reads from RNA-Seq alignments and annotated exon coordinates. Another approach includes detecting and quantifying AS events by mutually exclusive junctions. MESA (Mutually Exclusive Splicing Analysis) computes percent splice in (PSI) values applying a mutually exclusive junction approach. To identify transcripts or novel AS events with differential usage or splicing, it is necessary to perform the correct differential analysis based on sample size and counts distribution. DRIMSeq preforms a Dirichlet multinomial distribution approach to identify significant genes and transcripts with differential usage. In addition, it could be implemented to perform differential splicing analysis (DS). The DM-DASE model workflow requires the quantification and classification of AS events using either JuncBASE or MESA, and takes a PSI counts file from either JuncBASE or MESA to performe DS analysis at the global or event-type level.
+Identifying differentially spliced genes and transcripts in cancer requires prior identification and annotation of AS events in tumors. To identify and annotate novel AS events (at either the cancer or pan-cancer or single-cell level), it is required to quantify and classify AS events from sequencing reads. JuncBASE (Junction-Based Analysis of Splicing Events) is a tool to quantify and classify AS events using splice junctions reads from RNA-Seq alignments and annotated exon coordinates. Another approach includes detecting and quantifying AS events by mutually exclusive junctions. MESA (Mutually Exclusive Splicing Analysis) computes percent splice in (PSI) values applying a mutually exclusive junction approach. To identify transcripts or novel AS events with differential usage or splicing, it is necessary to perform the correct differential analysis based on sample size and counts distribution. DRIMSeq performs a Dirichlet multinomial distribution approach to identify significant genes and transcripts with differential usage. In addition, it could be implemented to perform differential splicing analysis (DS). The DM-DASE model workflow requires the quantification and classification of AS events using either JuncBASE or MESA, and takes a PSI counts file from either JuncBASE or MESA to performe DS analysis at the global or event-type level.
 
 </h1>
-<img src= "https://github.com/caeareva/DASE/blob/fb4a147bf47227aa480bbe07b0a5e741bdae935d/figures/as_event_types.png"
+<img src= "https://github.com/caeareva/DM-DASE/blob/616157d31dc6ea292eab4abaaa7167a2e2781f8c/figures/as_event_types.png"
 </h1>
 
 ## JuncBASE
@@ -165,7 +165,7 @@ deactivate
 Convert BAMs to BEDs with junctions
 ```bash
 mesa bam_to_junc_bed \
-        -m manifest_bam.tsv \
+    -m manifest_bam.tsv \
 	-o /MESA_HG38/ \
 	-n 10 -s inferCombine \
 	-a gencode.v38.annotation.gtf \
@@ -175,7 +175,7 @@ mesa bam_to_junc_bed \
 Quantify MESA events
 ```bash
 mesa quant \
-        -m manifest_bed.tsv \
+    -m manifest_bed.tsv \
 	-o /MESA_U2AF1_HG38/ \
 	--drim --maxLength 50000 --minLength 50 --minOverhang 5 \
 	--minUnique 5 --lowCoverageNan --minEntropy 1
@@ -188,7 +188,7 @@ Compute global DS/DU analysis from JuncBase counts
 conda create -n "temp_rEnv" r-essentials r-base
 conda activate temp_rEnv
 
-Rscript .../DASE/compute_dmDASE_main_model.R  \
+Rscript .../src/dase/compute_dmDASE_main_model.R  \
    -i JB_AS_exclusion_inclusion_counts_lenNorm.txt \
    -m metadata.tsv \
    -g gencode.v38.annotation.gtf \
@@ -211,7 +211,7 @@ Rscript .../DASE/compute_dmDASE_main_model.R  \
 
 AS event-specific DS/DU analysis from JuncBase counts. Some event types include `cassette`, `intron_retention`, `alternative_acceptor`, `alternative_donor`, `jcn_only_AD`, `jcn_only_AA`, `coord_cassette`, `mutually_exclusive`, `alternative_last_exon`, and `alternative_first_exon`.
 ```bash
-Rscript .../DASE/compute_dmDASE_main_model.R  \
+Rscript .../src/dase/compute_dmDASE_main_model.R  \
    -i JB_AS_exclusion_inclusion_counts_lenNorm.txt \
    -m metadata.tsv \
    -g gencode.v38.annotation.gtf \
@@ -235,7 +235,7 @@ Rscript .../DASE/compute_dmDASE_main_model.R  \
 
 Compute DS/DU analysis from MESA
 ```bash
-Rscript .../DASE/compute_dmDASE_main_model.R \
+Rscript .../src/dase/compute_dmDASE_main_model.R \
    -i MESA_drimTable.tsv \
    -m metadata.tsv \
    -g gencode.v38.annotation.gtf \
@@ -302,7 +302,7 @@ Rscript qqplot_main_program.R \
 Volcano plots: MT/WT volcano plot
 ```bash
 # Global analysis:
-Rscript /volcano_program.R \
+Rscript volcano_program.R \
   -i drimseq_lfc_padj_results.tsv \
   -l "global" \
   -c "MT/WT" \
