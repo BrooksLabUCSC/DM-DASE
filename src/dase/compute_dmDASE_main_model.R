@@ -97,7 +97,7 @@ source(".../src/dase/infer_unannotated_events.R")
 source(".../src/dase/barplot_main_program.R")
 source(".../src/dase/utils.R")
 
-parser = ArgumentParser(description="DASE_DrimSeq_main_model.R - Differential usage (DU) and transcript usage QTL (tuQTL) analysis with DRIMSeq")
+parser = ArgumentParser(description="compute_dmDASE_main_model.R - Differential usage (DU) and transcript usage QTL (tuQTL) analysis with DRIMSeq")
 parser$add_argument("-i", "--input", type="character", required=TRUE, help="JuncBase AS exclusion-inclusion counts or MESA junction counts table in DRIMSeq format") 
 parser$add_argument("-i2", "--input2", type="character", help="Gene ranges file for tuQTL analysis in the form of table/data-frame") 
 parser$add_argument("-i3", "--input3", type="character", help="SNPs genotypes raw counts/dosages for tuQTL analysis in the form of table/data-frame") 
