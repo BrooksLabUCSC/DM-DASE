@@ -32,7 +32,6 @@ You can find documentation <a href="docs/end_to_end_workflow.md">here</a>
 
 * Quantifies significant AS event proportions from DU or DS results (JuncBASE only)
 * Perform enrichment/pathway analysis on significant AS events
-* Plot raw reads for a given event or region comparing WT vs MT samples
 
 </h1>
 <img src= "figures/dase_framework.png"
