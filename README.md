@@ -21,10 +21,10 @@ You can find documentation <a href="docs/end_to_end_workflow.md">here</a>
 
 #### Main analysis
 
-* Peforms either DU or DS global and/or specific comparison analyses
-* Peforms gene and transcript level p-value adjustment using a two-stage test from stageR
-* Calculates LFC and &Delta;PSI values from fitted transcript proportions from all MT vs WT conditions (for global analysis)
-* If performing comparison analysis, model calculates LFC and &Delta;PSI from fitted transcript proportions from samples in condition1 vs samples in condition2 
+* Performs either DU or DS global and/or specific comparison analyses
+* Performs gene and transcript level p-value adjustment using a two-stage test from stageR
+* Calculates &Delta;PSI and LFC values from fitted transcript proportions from all MT vs WT conditions (for global analysis)
+* If performing comparison analysis, model calculates &Delta;PSI and LFC values from fitted transcript proportions from samples in condition1 vs samples in condition2 
 * Performs batch correction DU or DS analysis (optional)
 * Annotates AS events with differential usage or splicing (both JuncBASE and/or MESA)
 
@@ -32,6 +32,7 @@ You can find documentation <a href="docs/end_to_end_workflow.md">here</a>
 
 * Quantifies significant AS event proportions from DU or DS results (JuncBASE only)
 * Perform enrichment/pathway analysis on significant AS events
+* Plot raw reads for a given event or region comparing WT vs MT samples
 
 </h1>
 <img src= "figures/dase_framework.png"
